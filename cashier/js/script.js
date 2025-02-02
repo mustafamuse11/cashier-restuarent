@@ -32,6 +32,7 @@ const menuItems = {
 };
 
 let currentOrder = [];
+let dailyTotal = 0;
 
 function initializeMenu() {
   const menuGrid = document.querySelector('.menu-grid');
@@ -91,15 +92,22 @@ function updateTotals() {
   document.getElementById('total').textContent = total.toFixed(2);
 }
 
-function clearOrder() {
+function clearOrder(resetDaily = false) {
   currentOrder = [];
   updateOrderDisplay();
+  if (resetDaily) {
+    resetDailyTotal();
+  }
 }
 
 function processPayment() {
   if (currentOrder.length === 0) return;
 
   const total = currentOrder.reduce((sum, item) => sum + item.price, 0) * 1.16;
+
+  dailyTotal += total;
+  updateDailyTotal();
+
   const modal = document.getElementById('sale-modal');
   document.getElementById('modal-total').textContent = `Amount: Ksh ${total.toFixed(2)}`;
 
@@ -110,7 +118,27 @@ function processPayment() {
   }, 2000);
 }
 
-window.onload = initializeMenu;
+function updateDailyTotal() {
+  const dailyTotalElement = document.getElementById('daily-total');
+  dailyTotalElement.textContent = dailyTotal.toFixed(2);
+
+  const amountElement = dailyTotalElement.parentElement;
+  amountElement.classList.add('highlight');
+
+  setTimeout(() => {
+    amountElement.classList.remove('highlight');
+  }, 300);
+}
+
+function resetDailyTotal() {
+  dailyTotal = 0;
+  updateDailyTotal();
+}
+
+window.onload = function () {
+  initializeMenu();
+  updateDailyTotal();
+};
 
 document.querySelectorAll('.category-btn').forEach(btn => {
   btn.addEventListener('click', (e) => {
