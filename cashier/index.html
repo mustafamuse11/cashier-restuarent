@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant POS System</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <h1>🍽️ Restaurant POS</h1>
+      </div>
+      <div class="user-info">
+        <span>Cashier: Mustafa</span>
+      </div>
+    </header>
+
+    <div class="main-content">
+      <div class="menu-section">
+        <div class="categories">
+          <button class="category-btn active">All</button>
+          <button class="category-btn">Burger</button>
+          <button class="category-btn">Pizza</button>
+          <button class="category-btn">Pasta</button>
+          <button class="category-btn">Rice</button>
+          <button class="category-btn">Chicken</button>
+          <button class="category-btn">Fish</button>
+          <button class="category-btn">Eggs</button>
+        </div>
+
+        <div class="menu-grid">
+          <!-- Menu items will be added by JavaScript -->
+        </div>
+      </div>
+
+      <div class="order-section">
+        <div class="order-header">
+          <h2>Current Order</h2>
+          <button class="clear-btn" onclick="clearOrder()">Clear All</button>
+        </div>
+
+        <div class="order-items" id="order-items">
+          <!-- Order items will be added here -->
+        </div>
+
+        <div class="order-summary">
+          <div class="subtotal">
+            <span>Subtotal</span>
+            <span>Ksh <span id="subtotal">0</span></span>
+          </div>
+          <div class="tax">
+            <span>Tax (16%)</span>
+            <span>Ksh <span id="tax">0</span></span>
+          </div>
+          <div class="total">
+            <span>Total</span>
+            <span>Ksh <span id="total">0</span></span>
+          </div>
+          <button class="pay-btn" onclick="processPayment()">Pay Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sale Complete Modal -->
+  <div id="sale-modal" class="modal">
+    <div class="modal-content">
+      <h2>Sale Complete!</h2>
+      <p id="modal-total"></p>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+
+</html>
